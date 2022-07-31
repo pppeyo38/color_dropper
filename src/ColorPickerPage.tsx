@@ -11,21 +11,24 @@ type RGB = {
 };
 
 export const ColorPickerPage = () => {
-  const [redValue, setRedValue] = useState(255);
-  const [greenValue, setGreenValue] = useState(255);
-  const [blueValue, setBlueValue] = useState(255);
+  const [num, setNum] = useState({ red: 255, green: 255, blue: 255 });
 
   const [value, onChange] = useState(
-    `rgba(${redValue}, ${greenValue}, ${blueValue}, 1)`
+    `rgba(${num.red}, ${num.green}, ${num.blue}, 1)`
   );
 
-  useEffect(() => {
-    onChange(`rgba(${redValue}, ${greenValue}, ${blueValue}, 1)`);
-  }, [redValue, greenValue, blueValue]);
-
-  const changeColor = () => {
-    onChange(`rgba(${redValue}, ${greenValue}, ${blueValue}, 1)`);
+  const setRgb = (e: string) => {
+    let rgb = e.match(/\d+/g);
+    setNum({
+      red: Number(rgb[0]),
+      green: Number(rgb[1]),
+      blue: Number(rgb[2]),
+    });
   };
+
+  useEffect(() => {
+    onChange(`rgb(${num.red}, ${num.green}, ${num.blue})`);
+  }, [num.red, num.green, num.blue]);
 
   return (
     <Div100vh>
@@ -33,7 +36,10 @@ export const ColorPickerPage = () => {
       <ColorPicker
         format="rgb"
         value={value}
-        onChange={changeColor}
+        onChange={(e) => {
+          onChange(e);
+          setRgb(e);
+        }}
         style={{ width: "fit-content", margin: "0 auto" }}
       />
       <section className="rgbSectionStyle">
@@ -41,31 +47,37 @@ export const ColorPickerPage = () => {
           <p className="sliderLabel">R</p>
           <Slider
             max={255}
-            value={redValue}
-            onChange={setRedValue}
+            value={num.red}
+            onChange={(e) => {
+              setNum((prevState) => ({ ...prevState, red: e }));
+            }}
             style={sliderStyle}
           />
-          <NumberInput hideControls value={redValue} />
+          <NumberInput hideControls value={num.red} />
         </div>
         <div className="sliderWrap greenSlider">
           <p className="sliderLabel">G</p>
           <Slider
             max={255}
-            value={greenValue}
-            onChange={setGreenValue}
+            value={num.green}
+            onChange={(e) => {
+              setNum((prevState) => ({ ...prevState, green: e }));
+            }}
             style={sliderStyle}
           />
-          <NumberInput hideControls value={greenValue} />
+          <NumberInput hideControls value={num.green} />
         </div>
         <div className="sliderWrap blueSlider">
           <p className="sliderLabel">B</p>
           <Slider
             max={255}
-            value={blueValue}
-            onChange={setBlueValue}
+            value={num.blue}
+            onChange={(e) => {
+              setNum((prevState) => ({ ...prevState, blue: e }));
+            }}
             style={sliderStyle}
           />
-          <NumberInput hideControls value={blueValue} />
+          <NumberInput hideControls value={num.blue} />
         </div>
       </section>
     </Div100vh>
