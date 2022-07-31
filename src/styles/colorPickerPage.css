@@ -1,0 +1,24 @@
+/* カラーピッカー部分 */
+.mantine-1ll3m72.mantine-ColorPicker-saturation {
+  width: 210px;
+  height: 210px;
+}
+
+/* 虹色スライダーのラッパー */
+.mantine-1510vke.mantine-ColorPicker-body {
+  padding-top: 20px;
+}
+
+/* スライダー */
+.mantine-o1ktji {
+  height: 25px;
+}
+
+/* スライダー操るとこ */
+.mantine-14042nq {
+  top: -2px;
+  width: 29px;
+  height: 29px;
+  border: 3px solid white;
+  border-radius: 50%;
+}

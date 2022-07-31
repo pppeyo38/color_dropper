@@ -1,7 +1,7 @@
-import { ColorPicker } from "./ColorPicker";
+import { ColorPickerPage } from "./ColorPickerPage";
 
 function App() {
-  return <ColorPicker />;
+  return <ColorPickerPage />;
 }
 
 export default App;
