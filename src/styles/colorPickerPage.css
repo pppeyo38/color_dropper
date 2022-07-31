@@ -1,7 +1,16 @@
+/* --- 共通部分 --- */
 /* カラーピッカー部分 */
 .mantine-1ll3m72.mantine-ColorPicker-saturation {
   width: 210px;
   height: 210px;
+}
+
+/* カラーピッカーの丸 */
+.mantine-ColorPicker-thumb.__mantine-ref-saturationThumb.mantine-ColorPicker-saturationThumb {
+  width: 12px;
+  height: 12px;
+  border: 2px solid white;
+  border-radius: 50%;
 }
 
 /* 虹色スライダーのラッパー */
@@ -9,16 +18,111 @@
   padding-top: 20px;
 }
 
-/* スライダー */
+/* 虹色スライダー */
 .mantine-o1ktji {
   height: 25px;
 }
 
-/* スライダー操るとこ */
-.mantine-14042nq {
-  top: -2px;
+/* 虹色スライダー操るとこ */
+.mantine-ColorPicker-thumb.__mantine-ref-sliderThumb.mantine-ColorPicker-sliderThumb {
+  top: -2px !important;
   width: 29px;
   height: 29px;
   border: 3px solid white;
   border-radius: 50%;
+}
+
+/* カラーピッカー下スライダー */
+.sliderWrap {
+  display: flex;
+  gap: 11px;
+}
+
+/* RGBスライダーセクション */
+.rgbSectionStyle {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: fit-content;
+  margin: 15px auto 0;
+}
+
+.sliderLabel {
+  margin-right: 14px;
+}
+
+/* rgbそれぞれの色にする */
+.redSlider
+  > .mantine-Slider-root
+  > .mantine-Slider-track
+  > .mantine-Slider-bar {
+  background-color: rgb(255, 0, 0);
+}
+
+.greenSlider
+  > .mantine-Slider-root
+  > .mantine-Slider-track
+  > .mantine-Slider-bar {
+  background-color: rgb(0, 255, 0);
+}
+
+.blueSlider
+  > .mantine-Slider-root
+  > .mantine-Slider-track
+  > .mantine-Slider-bar {
+  background-color: rgb(0, 0, 255);
+}
+
+.redSlider
+  > .mantine-Slider-root
+  > .mantine-Slider-track
+  > .mantine-Slider-thumb {
+  background-color: rgb(255, 0, 0);
+  border: 3px solid white;
+}
+
+.greenSlider
+  > .mantine-Slider-root
+  > .mantine-Slider-track
+  > .mantine-Slider-thumb {
+  background-color: rgb(0, 255, 0);
+  border: 3px solid white;
+}
+
+.blueSlider
+  > .mantine-Slider-root
+  > .mantine-Slider-track
+  > .mantine-Slider-thumb {
+  background-color: rgb(0, 0, 255);
+  border: 3px solid white;
+}
+
+/* スライダーラッパー */
+.mantine-Slider-root {
+  height: 25px;
+}
+
+.mantine-Slider-bar {
+  height: 25px;
+}
+
+/* 背景部分 */
+.mantine-Slider-track {
+  height: 25px;
+}
+
+/* つまみ */
+.mantine-Slider-thumb {
+  top: 12px;
+  width: 29px;
+  height: 29px;
+  border-radius: 50%;
+}
+
+/* 数値フォーム */
+.mantine-Input-input.mantine-NumberInput-input.mantine-gqmpge {
+  width: 45px;
+  height: 25px;
+  min-height: 25px;
+  padding: 3px 9px;
 }
