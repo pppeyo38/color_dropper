@@ -1,8 +1,8 @@
 /* --- 共通部分 --- */
 /* カラーピッカー部分 */
 .mantine-1ll3m72.mantine-ColorPicker-saturation {
-  width: 210px;
-  height: 210px;
+  width: 196px;
+  height: 196px;
 }
 
 /* カラーピッカーの丸 */
@@ -15,6 +15,7 @@
 
 /* 虹色スライダーのラッパー */
 .mantine-1510vke.mantine-ColorPicker-body {
+  width: 210px;
   padding-top: 20px;
 }
 
@@ -34,8 +35,9 @@
 
 /* カラーピッカー下スライダー */
 .sliderWrap {
+  position: relative;
+  width: 210px;
   display: flex;
-  gap: 11px;
 }
 
 /* RGBスライダーセクション */
@@ -43,12 +45,15 @@
   display: flex;
   flex-direction: column;
   gap: 15px;
-  width: fit-content;
+  width: 210px;
   margin: 15px auto 0;
 }
 
 .sliderLabel {
-  margin-right: 14px;
+  position: absolute;
+  top: 0;
+  left: -35px;
+  font-family: Roboto;
 }
 
 /* rgbそれぞれの色にする */
@@ -121,6 +126,9 @@
 
 /* 数値フォーム */
 .mantine-Input-input.mantine-NumberInput-input.mantine-gqmpge {
+  position: absolute;
+  top: 0;
+  right: -56px;
   width: 45px;
   height: 25px;
   min-height: 25px;
