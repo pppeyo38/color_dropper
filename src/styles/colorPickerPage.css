@@ -1,4 +1,19 @@
 /* --- 共通部分 --- */
+/* 上部数値フォーム */
+.mantine-InputWrapper-root.mantine-NumberInput-root.mantine-1m3pqry {
+  width: 180px;
+  margin: 0 auto 20px;
+  font-family: Roboto;
+}
+.mantine-Input-input.mantine-NumberInput-input.mantine-Input-withIcon.mantine-NumberInput-withIcon {
+  height: 40px;
+  padding: 0;
+  text-align: center;
+  border: none;
+  border-radius: 100px;
+  background-color: #f2f2f2;
+}
+
 /* 変換 */
 .mantine-InputWrapper-root.mantine-Select-root.mantine-1m3pqry {
   width: 150px;
@@ -150,6 +165,7 @@
 
 /* 背景部分 */
 .mantine-Slider-track {
+  width: 210px;
   height: 25px;
 }
 

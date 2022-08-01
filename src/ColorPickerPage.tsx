@@ -1,9 +1,10 @@
 import { useEffect, useState } from "react";
 import Div100vh from "react-div-100vh";
-import { ColorPicker, Select } from "@mantine/core";
+import { ColorPicker, NumberInput, Select } from "@mantine/core";
 import { useRGB } from "./hooks/useRGB";
 import "./styles/colorPickerPage.css";
 import { SettingRGB } from "./components/SettingRGB";
+import { HashTag } from "./icons/HashTag";
 
 export const ColorPickerPage = () => {
   const { valueRGB, setValueRGB } = useRGB();
@@ -33,6 +34,7 @@ export const ColorPickerPage = () => {
   return (
     <Div100vh>
       <h2>{stringRGB}</h2>
+      <NumberInput hideControls icon={<HashTag />} />
       <Select
         value={conversion}
         onChange={(e) => e !== null && setConversion(e)}
