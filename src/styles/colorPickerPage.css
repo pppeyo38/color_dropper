@@ -1,11 +1,11 @@
 /* --- 共通部分 --- */
 /* 上部数値フォーム */
-.mantine-InputWrapper-root.mantine-NumberInput-root.mantine-1m3pqry {
+.mantine-Input-wrapper.mantine-12sbrde {
   width: 180px;
-  margin: 0 auto 20px;
+  margin: 90px auto 20px;
   font-family: Roboto;
 }
-.mantine-Input-input.mantine-NumberInput-input.mantine-Input-withIcon.mantine-NumberInput-withIcon {
+#inputHex {
   height: 40px;
   padding: 0;
   text-align: center;
@@ -15,8 +15,7 @@
 }
 
 /* 変換 */
-.mantine-InputWrapper-root.mantine-Select-root.mantine-1m3pqry {
-  width: 150px;
+.mantine-Input-wrapper.mantine-Select-wrapper.mantine-12sbrde {
   margin: 0 auto;
 }
 
@@ -178,6 +177,10 @@
 }
 
 /* 数値フォーム */
+.mantine-Input-wrapper.mantine-NumberInput-wrapper.mantine-12sbrde {
+  width: 0;
+  margin: 0;
+}
 .mantine-Input-input.mantine-NumberInput-input.mantine-gqmpge {
   position: absolute;
   top: 0;
