@@ -1,34 +1,46 @@
+import { useEffect, useState, createRef } from "react";
 import Div100vh from "react-div-100vh";
 import { ColorPicker, Slider, NumberInput } from "@mantine/core";
-
+import { useRGB } from "./hooks/useRGB";
 import "./styles/colorPickerPage.css";
-import { useEffect, useState } from "react";
-
-type RGB = {
-  red: number;
-  green: number;
-  blue: number;
-};
 
 export const ColorPickerPage = () => {
-  const [num, setNum] = useState({ red: 255, green: 255, blue: 255 });
+  const { valueRGB, setValueRGB } = useRGB();
 
+  // カラーピッカーの値
   const [value, onChange] = useState(
-    `rgba(${num.red}, ${num.green}, ${num.blue}, 1)`
+    `rgba(${valueRGB.red}, ${valueRGB.green}, ${valueRGB.blue}, 1)`
   );
 
-  const setRgb = (e: string) => {
-    let rgb = e.match(/\d+/g);
-    setNum({
-      red: Number(rgb[0]),
-      green: Number(rgb[1]),
-      blue: Number(rgb[2]),
-    });
+  // string型のRGB値をnumber型に変換→更新
+  const setRGBStringToNum = (stringRGB: string) => {
+    const getValue = stringRGB.match(/\d+/g);
+    if (getValue !== null) {
+      const rgb = getValue.map((str) => parseInt(str, 10));
+      setValueRGB({ red: rgb[0], green: rgb[1], blue: rgb[2] });
+    }
   };
 
+  const inputRedValue = (value: number) => {
+    if (0 <= value && value <= 255) {
+      setValueRGB((prevState) => ({ ...prevState, red: value }));
+    }
+  };
+  const inputGreenValue = (value: number) => {
+    if (0 <= value && value <= 255) {
+      setValueRGB((prevState) => ({ ...prevState, green: value }));
+    }
+  };
+  const inputBlueValue = (value: number) => {
+    if (0 <= value && value <= 255) {
+      setValueRGB((prevState) => ({ ...prevState, blue: value }));
+    }
+  };
+
+  // スライダーの数値が変わったらピッカー部分の数値も変化
   useEffect(() => {
-    onChange(`rgb(${num.red}, ${num.green}, ${num.blue})`);
-  }, [num.red, num.green, num.blue]);
+    onChange(`rgb(${valueRGB.red}, ${valueRGB.green}, ${valueRGB.blue})`);
+  }, [valueRGB.red, valueRGB.green, valueRGB.blue]);
 
   return (
     <Div100vh>
@@ -38,7 +50,7 @@ export const ColorPickerPage = () => {
         value={value}
         onChange={(e) => {
           onChange(e);
-          setRgb(e);
+          setRGBStringToNum(e);
         }}
         style={{ width: "fit-content", margin: "0 auto" }}
       />
@@ -47,37 +59,67 @@ export const ColorPickerPage = () => {
           <p className="sliderLabel">R</p>
           <Slider
             max={255}
-            value={num.red}
+            value={valueRGB.red}
             onChange={(e) => {
-              setNum((prevState) => ({ ...prevState, red: e }));
+              setValueRGB((prevState) => ({ ...prevState, red: e }));
             }}
             style={sliderStyle}
           />
-          <NumberInput hideControls value={num.red} />
+          <NumberInput
+            hideControls
+            min={0}
+            max={255}
+            value={valueRGB.red}
+            onChange={(e) => {
+              if (e !== undefined) {
+                inputRedValue(e);
+              }
+            }}
+          />
         </div>
         <div className="sliderWrap greenSlider">
           <p className="sliderLabel">G</p>
           <Slider
             max={255}
-            value={num.green}
+            value={valueRGB.green}
             onChange={(e) => {
-              setNum((prevState) => ({ ...prevState, green: e }));
+              setValueRGB((prevState) => ({ ...prevState, green: e }));
             }}
             style={sliderStyle}
           />
-          <NumberInput hideControls value={num.green} />
+          <NumberInput
+            hideControls
+            min={0}
+            max={255}
+            value={valueRGB.green}
+            onChange={(e) => {
+              if (e !== undefined) {
+                inputGreenValue(e);
+              }
+            }}
+          />
         </div>
         <div className="sliderWrap blueSlider">
           <p className="sliderLabel">B</p>
           <Slider
             max={255}
-            value={num.blue}
+            value={valueRGB.blue}
             onChange={(e) => {
-              setNum((prevState) => ({ ...prevState, blue: e }));
+              setValueRGB((prevState) => ({ ...prevState, blue: e }));
             }}
             style={sliderStyle}
           />
-          <NumberInput hideControls value={num.blue} />
+          <NumberInput
+            hideControls
+            min={0}
+            max={255}
+            value={valueRGB.blue}
+            onChange={(e) => {
+              if (e !== undefined) {
+                inputBlueValue(e);
+              }
+            }}
+          />
         </div>
       </section>
     </Div100vh>
