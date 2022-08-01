@@ -1,4 +1,10 @@
 /* --- 共通部分 --- */
+.palettes {
+  width: fit-content;
+  margin: 10px auto 20px;
+  display: flex;
+}
+
 /* カラーピッカー部分 */
 .mantine-1ll3m72.mantine-ColorPicker-saturation {
   width: 196px;

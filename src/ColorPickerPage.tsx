@@ -30,6 +30,18 @@ export const ColorPickerPage = () => {
   return (
     <Div100vh>
       <h2>{value}</h2>
+      <section className="palettes">
+        <div
+          style={{ width: "105px", height: "20px", backgroundColor: "#D9D9D9" }}
+        ></div>
+        <div
+          style={{
+            width: "105px",
+            height: "20px",
+            backgroundColor: `${value}`,
+          }}
+        ></div>
+      </section>
       <ColorPicker
         format="rgb"
         value={value}
