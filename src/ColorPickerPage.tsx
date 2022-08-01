@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import Div100vh from "react-div-100vh";
-import { ColorPicker } from "@mantine/core";
+import { ColorPicker, Select } from "@mantine/core";
 import { useRGB } from "./hooks/useRGB";
 import "./styles/colorPickerPage.css";
 import { SettingRGB } from "./components/SettingRGB";
@@ -8,8 +8,11 @@ import { SettingRGB } from "./components/SettingRGB";
 export const ColorPickerPage = () => {
   const { valueRGB, setValueRGB } = useRGB();
 
+  // 変換方式
+  const [conversion, setConversion] = useState("rgb");
+
   // カラーピッカーの値
-  const [value, onChange] = useState(
+  const [stringRGB, onChange] = useState(
     `rgba(${valueRGB.red}, ${valueRGB.green}, ${valueRGB.blue}, 1)`
   );
 
@@ -29,7 +32,16 @@ export const ColorPickerPage = () => {
 
   return (
     <Div100vh>
-      <h2>{value}</h2>
+      <h2>{stringRGB}</h2>
+      <Select
+        value={conversion}
+        onChange={(e) => e !== null && setConversion(e)}
+        data={[
+          { value: "rgb", label: "RGB" },
+          { value: "cmyk", label: "CMYK" },
+          { value: "hsv", label: "HSV" },
+        ]}
+      />
       <section className="palettes">
         <div
           style={{ width: "105px", height: "20px", backgroundColor: "#D9D9D9" }}
@@ -38,20 +50,22 @@ export const ColorPickerPage = () => {
           style={{
             width: "105px",
             height: "20px",
-            backgroundColor: `${value}`,
+            backgroundColor: `${stringRGB}`,
           }}
         ></div>
       </section>
       <ColorPicker
         format="rgb"
-        value={value}
+        value={stringRGB}
         onChange={(e) => {
           onChange(e);
           setRGBStringToNum(e);
         }}
         style={{ width: "fit-content", margin: "0 auto" }}
       />
-      <SettingRGB valueRGB={valueRGB} setValueRGB={setValueRGB} />
+      {conversion === "rgb" && (
+        <SettingRGB valueRGB={valueRGB} setValueRGB={setValueRGB} />
+      )}
     </Div100vh>
   );
 };
