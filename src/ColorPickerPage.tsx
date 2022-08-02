@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import Div100vh from "react-div-100vh";
 import { ColorPicker, Input, Select } from "@mantine/core";
-import { useRGB } from "./hooks/useRGB";
+import { useColorHex } from "./hooks/useColorHex";
 import "./styles/colorPickerPage.css";
 import { SettingRGB } from "./components/SettingRGB";
 import { HashTag } from "./icons/HashTag";
 
 export const ColorPickerPage = () => {
-  const { valueRGB, setValueRGB } = useRGB();
+  const { colorHex, onChangeColor } = useColorHex();
 
   const ColorToHex = (value: number) => {
     let hexadecimal = value.toString(16);
@@ -21,32 +21,9 @@ export const ColorPickerPage = () => {
   // 変換方式
   const [conversion, setConversion] = useState("rgb");
 
-  // カラーピッカーの値
-  const [stringRGB, onChange] = useState(
-    `rgba(${valueRGB.red}, ${valueRGB.green}, ${valueRGB.blue}, 1)`
-  );
-
-  // string型のRGB値をnumber型に変換→更新
-  const setRGBStringToNum = (stringRGB: string) => {
-    const getValue = stringRGB.match(/\d+/g);
-    if (getValue !== null) {
-      const rgb = getValue.map((str) => parseInt(str, 10));
-      setValueRGB({ red: rgb[0], green: rgb[1], blue: rgb[2] });
-    }
-  };
-
-  // スライダーの数値が変わったらピッカー部分の数値も変化
-  useEffect(() => {
-    onChange(`rgb(${valueRGB.red}, ${valueRGB.green}, ${valueRGB.blue})`);
-  }, [valueRGB.red, valueRGB.green, valueRGB.blue]);
-
   return (
     <Div100vh>
-      <Input
-        id="inputHex"
-        icon={<HashTag />}
-        value={ConvertRGBtoHex(valueRGB.red, valueRGB.green, valueRGB.blue)}
-      />
+      <Input id="inputHex" icon={<HashTag />} value={colorHex} />
       <Select
         value={conversion}
         onChange={(e) => e !== null && setConversion(e)}
@@ -64,22 +41,22 @@ export const ColorPickerPage = () => {
           style={{
             width: "105px",
             height: "20px",
-            backgroundColor: `${stringRGB}`,
+            backgroundColor: `${colorHex}`,
           }}
         ></div>
       </section>
       <ColorPicker
-        format="rgb"
-        value={stringRGB}
+        format="hex"
+        value={colorHex}
         onChange={(e) => {
-          onChange(e);
-          setRGBStringToNum(e);
+          onChangeColor(e);
+          console.log(e);
         }}
         style={{ width: "fit-content", margin: "0 auto" }}
       />
-      {conversion === "rgb" && (
+      {/* {conversion === "rgb" && (
         <SettingRGB valueRGB={valueRGB} setValueRGB={setValueRGB} />
-      )}
+      )} */}
     </Div100vh>
   );
 };
