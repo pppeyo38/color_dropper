@@ -1,27 +1,22 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction, FC } from "react";
 import { Slider, NumberInput } from "@mantine/core";
-import { RGB } from "../type/RGB";
+import { useHexToRgb } from "../hooks/useHexToRgb";
+import { ColorValuesType } from "../hooks/useColor";
 
 type Props = {
-  valueRGB: RGB;
-  setValueRGB: Dispatch<SetStateAction<RGB>>;
+  colorValues: ColorValuesType;
+  setColorValues: Dispatch<SetStateAction<ColorValuesType>>;
 };
 
-export const SettingRGB = ({ valueRGB, setValueRGB }: Props) => {
-  const inputRedValue = (value: number) => {
-    if (0 <= value && value <= 255) {
-      setValueRGB((prevState) => ({ ...prevState, red: value }));
-    }
-  };
-  const inputGreenValue = (value: number) => {
-    if (0 <= value && value <= 255) {
-      setValueRGB((prevState) => ({ ...prevState, green: value }));
-    }
-  };
-  const inputBlueValue = (value: number) => {
-    if (0 <= value && value <= 255) {
-      setValueRGB((prevState) => ({ ...prevState, blue: value }));
-    }
+export const SettingRGB: FC<Props> = (props) => {
+  const { colorValues, setColorValues } = props;
+  const { setHexColorCode } = useHexToRgb();
+
+  const handleChange = (value: number, color: string) => {
+    setColorValues((prev) => ({
+      hex: setHexColorCode(prev.rgb.red, prev.rgb.green, prev.rgb.blue),
+      rgb: { ...prev.rgb, [color]: value },
+    }));
   };
 
   return (
@@ -30,20 +25,18 @@ export const SettingRGB = ({ valueRGB, setValueRGB }: Props) => {
         <p className="sliderLabel">R</p>
         <Slider
           max={255}
-          value={valueRGB.red}
-          onChange={(e) => {
-            setValueRGB((prevState) => ({ ...prevState, red: e }));
-          }}
+          value={colorValues.rgb.red}
+          onChange={(e) => handleChange(e, "red")}
           style={sliderStyle}
         />
         <NumberInput
           hideControls
           min={0}
           max={255}
-          value={valueRGB.red}
+          value={colorValues.rgb.red}
           onChange={(e) => {
             if (e !== undefined) {
-              inputRedValue(e);
+              handleChange(e, "red");
             }
           }}
         />
@@ -52,20 +45,18 @@ export const SettingRGB = ({ valueRGB, setValueRGB }: Props) => {
         <p className="sliderLabel">G</p>
         <Slider
           max={255}
-          value={valueRGB.green}
-          onChange={(e) => {
-            setValueRGB((prevState) => ({ ...prevState, green: e }));
-          }}
+          value={colorValues.rgb.green}
+          onChange={(e) => handleChange(e, "green")}
           style={sliderStyle}
         />
         <NumberInput
           hideControls
           min={0}
           max={255}
-          value={valueRGB.green}
+          value={colorValues.rgb.green}
           onChange={(e) => {
             if (e !== undefined) {
-              inputGreenValue(e);
+              handleChange(e, "green");
             }
           }}
         />
@@ -74,20 +65,18 @@ export const SettingRGB = ({ valueRGB, setValueRGB }: Props) => {
         <p className="sliderLabel">B</p>
         <Slider
           max={255}
-          value={valueRGB.blue}
-          onChange={(e) => {
-            setValueRGB((prevState) => ({ ...prevState, blue: e }));
-          }}
+          value={colorValues.rgb.blue}
+          onChange={(e) => handleChange(e, "blue")}
           style={sliderStyle}
         />
         <NumberInput
           hideControls
           min={0}
           max={255}
-          value={valueRGB.blue}
+          value={colorValues.rgb.blue}
           onChange={(e) => {
             if (e !== undefined) {
-              inputBlueValue(e);
+              handleChange(e, "blue");
             }
           }}
         />
