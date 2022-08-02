@@ -14,8 +14,12 @@ export const SettingRGB: FC<Props> = (props) => {
 
   const handleChange = (value: number, color: string) => {
     setColorValues((prev) => ({
-      hex: setHexColorCode(prev.rgb.red, prev.rgb.green, prev.rgb.blue),
+      ...prev,
       rgb: { ...prev.rgb, [color]: value },
+    }));
+    setColorValues((prev) => ({
+      ...prev,
+      hex: setHexColorCode(prev.rgb.red, prev.rgb.green, prev.rgb.blue),
     }));
   };
 
