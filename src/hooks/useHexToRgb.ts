@@ -27,5 +27,5 @@ export const useHexToRgb = () => {
     };
   };
 
-  return { setHexColorCode, setDecimal };
+  return { toHex, setHexColorCode, setDecimal };
 };
