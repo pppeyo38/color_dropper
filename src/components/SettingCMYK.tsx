@@ -45,7 +45,7 @@ export const SettingCMYK: FC<Props> = (props) => {
   const keyBg = setRGBtoHex({ red: rgb[0], green: rgb[1], blue: rgb[2] });
 
   return (
-    <section className="cmykSectionStyle">
+    <Section>
       <SliderWrap bg={"#00FFF0"}>
         <SliderLabel>C</SliderLabel>
         <Slider
@@ -126,13 +126,21 @@ export const SettingCMYK: FC<Props> = (props) => {
           }}
         />
       </KeySlider>
-    </section>
+    </Section>
   );
 };
 
 const sliderStyle = {
   width: "210px",
 };
+
+const Section = styled.section`
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 210px;
+  margin: 15px auto 0;
+`;
 
 const SliderLabel = styled.p`
   position: absolute;
@@ -144,6 +152,7 @@ const SliderLabel = styled.p`
 const SliderWrap = styled.div<{ bg: string }>`
   position: relative;
   width: 210px;
+  height: 25px;
   display: flex;
 
   & .mantine-Slider-root > .mantine-Slider-track > .mantine-Slider-bar {
@@ -163,20 +172,40 @@ const SliderWrap = styled.div<{ bg: string }>`
     background: none;
     box-shadow: 0 0 0 0.5px #9b9b9b, inset 0 0 0 0.5px #9b9b9b;
   }
+
+  & .mantine-Input-wrapper.mantine-NumberInput-wrapper.mantine-12sbrde {
+    width: 0;
+    margin: 0;
+  }
+  & .mantine-Input-input.mantine-NumberInput-input.mantine-gqmpge {
+    position: absolute;
+    top: 0;
+    right: -56px;
+    width: 45px;
+    height: 25px;
+    min-height: 25px;
+    padding: 3px 9px;
+  }
 `;
 
 // Kスライダー
 const KeySlider = styled.div<{ bg: string }>`
   position: relative;
   width: 210px;
+  height: 25px;
   display: flex;
 
   & .mantine-Slider-root > .mantine-Slider-track > .mantine-Slider-bar {
     display: none;
   }
 
-  & .mantine-Slider-root > .mantine-Slider-track:before {
-    ${({ bg }) => `background: linear-gradient(to right, ${bg}, black)`}
+  & .mantine-Slider-root > .mantine-Slider-track {
+    width: 210px;
+    height: 25px;
+
+    &:before {
+      ${({ bg }) => `background: linear-gradient(to right, ${bg}, black)`}
+    }
   }
 
   & .mantine-Slider-root > .mantine-Slider-track > .mantine-Slider-thumb {
@@ -187,5 +216,19 @@ const KeySlider = styled.div<{ bg: string }>`
     border: solid 3px white;
     background: none;
     box-shadow: 0 0 0 0.5px #9b9b9b, inset 0 0 0 0.5px #9b9b9b;
+  }
+
+  & .mantine-Input-wrapper.mantine-NumberInput-wrapper.mantine-12sbrde {
+    width: 0;
+    margin: 0;
+  }
+  & .mantine-Input-input.mantine-NumberInput-input.mantine-gqmpge {
+    position: absolute;
+    top: 0;
+    right: -56px;
+    width: 45px;
+    height: 25px;
+    min-height: 25px;
+    padding: 3px 9px;
   }
 `;
