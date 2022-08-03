@@ -1,6 +1,7 @@
 import { Dispatch, SetStateAction, FC } from "react";
 import { Slider, NumberInput } from "@mantine/core";
 import { useHexToRgb } from "../hooks/useHexToRgb";
+import { useCmykToRgb } from "../hooks/useCmykToRgb";
 import { ColorValuesType } from "../hooks/useColor";
 import styled from "styled-components";
 
@@ -12,6 +13,7 @@ type Props = {
 export const SettingRGB: FC<Props> = (props) => {
   const { colorValues, setColorValues } = props;
   const { setRGBtoHex } = useHexToRgb();
+  const { setRGBtoCMYK } = useCmykToRgb();
 
   const handleChange = (value: number, color: string) => {
     setColorValues((prev) => ({
@@ -21,6 +23,13 @@ export const SettingRGB: FC<Props> = (props) => {
     setColorValues((prev) => ({
       ...prev,
       hex: setRGBtoHex(prev.rgb),
+      cmyk: {
+        ...prev.cmyk,
+        cyan: setRGBtoCMYK(prev.rgb)[0],
+        magenta: setRGBtoCMYK(prev.rgb)[1],
+        yellow: setRGBtoCMYK(prev.rgb)[2],
+        key: setRGBtoCMYK(prev.rgb)[3],
+      },
     }));
   };
 

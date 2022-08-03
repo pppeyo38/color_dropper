@@ -5,6 +5,7 @@ import { useHexToRgb } from "./hooks/useHexToRgb";
 import { useCmykToRgb } from "./hooks/useCmykToRgb";
 import { SettingRGB } from "./components/SettingRGB";
 import { SettingCMYK } from "./components/SettingCMYK";
+import { SettingHSV } from "./components/SettingHSV";
 import { HashTag } from "./icons/HashTag";
 import { ColorPicker, Input, Select } from "@mantine/core";
 import "./styles/colorPickerPage.css";
@@ -39,9 +40,16 @@ export const ColorPickerPage = () => {
     }));
   };
 
+  const handleChangeHsl = (value: string) => {
+    setColorValues((prev) => ({
+      ...prev,
+      hsl: value,
+    }));
+  };
+
   return (
     <Div100vh>
-      <Content>
+      <Content isHsv={conversion === "hsv" ? true : false}>
         <Input
           id="inputHex"
           icon={<HashTag />}
@@ -69,7 +77,7 @@ export const ColorPickerPage = () => {
           ></div>
         </section>
         <ColorPicker
-          format="hex"
+          format={"hex"}
           value={colorValues.hex}
           onChange={(e) => handleChange(e)}
           style={{ width: "fit-content", margin: "0 auto" }}
@@ -86,11 +94,25 @@ export const ColorPickerPage = () => {
             setColorValues={setColorValues}
           />
         )}
+        {conversion === "hsv" && (
+          <SettingHSV
+            colorValues={colorValues}
+            setColorValues={setColorValues}
+          />
+        )}
       </Content>
     </Div100vh>
   );
 };
 
-const Content = styled.div`
+const Content = styled.div<{ isHsv: boolean }>`
   padding-top: 20%;
+
+  ${(props) =>
+    props.isHsv &&
+    `
+      & .mantine-ColorPicker-wrapper.mantine-1m6yxe8 > .mantine-ColorPicker-body {
+        display: none;
+      }
+  `}
 `;
