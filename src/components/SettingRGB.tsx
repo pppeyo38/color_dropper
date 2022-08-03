@@ -130,8 +130,8 @@ const SliderWrap = styled.div<{ bg: string }>`
 
   & .mantine-Slider-root > .mantine-Slider-track > .mantine-Slider-thumb {
     display: inline-block;
-    width: 30px;
-    height: 30px;
+    width: 29px;
+    height: 29px;
     border-radius: 50%;
     border: solid 3px white;
     background: none;

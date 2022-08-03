@@ -2,7 +2,7 @@
 /* 上部数値フォーム */
 .mantine-Input-wrapper.mantine-12sbrde {
   width: 180px;
-  margin: 90px auto 20px;
+  margin: 0 auto 20px;
   font-family: Roboto;
 }
 #inputHex {
@@ -26,8 +26,8 @@
   font-size: 16px;
 }
 
-.mantine-Select-dropdown.mantine-nu9wnz {
-  width: 152px;
+.mantine-Select-dropdown.mantine-rynikm {
+  width: 152px !important;
 }
 
 .mantine-xlwgkm.mantine-ScrollArea-viewport > div > div {
@@ -89,89 +89,4 @@
   position: relative;
   width: 210px;
   display: flex;
-}
-
-/* RGBスライダーセクション */
-.rgbSectionStyle {
-  display: flex;
-  flex-direction: column;
-  gap: 15px;
-  width: 210px;
-  margin: 15px auto 0;
-}
-
-.sliderLabel {
-  position: absolute;
-  top: 0;
-  left: -35px;
-  font-family: Roboto;
-}
-
-/* rgbそれぞれの色にする */
-.redSlider
-  > .mantine-Slider-root
-  > .mantine-Slider-track
-  > .mantine-Slider-bar {
-  background-color: rgb(255, 0, 0);
-}
-
-.greenSlider
-  > .mantine-Slider-root
-  > .mantine-Slider-track
-  > .mantine-Slider-bar {
-  background-color: rgb(0, 255, 0);
-}
-
-.blueSlider
-  > .mantine-Slider-root
-  > .mantine-Slider-track
-  > .mantine-Slider-bar {
-  background-color: rgb(0, 0, 255);
-}
-
-.redSlider
-  > .mantine-Slider-root
-  > .mantine-Slider-track
-  > .mantine-Slider-thumb {
-  background-color: rgb(255, 0, 0);
-  border: 3px solid white;
-}
-
-.greenSlider
-  > .mantine-Slider-root
-  > .mantine-Slider-track
-  > .mantine-Slider-thumb {
-  background-color: rgb(0, 255, 0);
-  border: 3px solid white;
-}
-
-.blueSlider
-  > .mantine-Slider-root
-  > .mantine-Slider-track
-  > .mantine-Slider-thumb {
-  background-color: rgb(0, 0, 255);
-  border: 3px solid white;
-}
-
-/* スライダーラッパー */
-.mantine-Slider-root {
-  height: 25px;
-}
-
-.mantine-Slider-bar {
-  height: 25px;
-}
-
-/* 背景部分 */
-.mantine-Slider-track {
-  width: 210px;
-  height: 25px;
-}
-
-/* つまみ */
-.mantine-Slider-thumb {
-  top: 12px;
-  width: 29px;
-  height: 29px;
-  border-radius: 50%;
 }

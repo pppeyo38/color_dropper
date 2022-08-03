@@ -8,6 +8,7 @@ import { SettingCMYK } from "./components/SettingCMYK";
 import { HashTag } from "./icons/HashTag";
 import { ColorPicker, Input, Select } from "@mantine/core";
 import "./styles/colorPickerPage.css";
+import styled from "styled-components";
 
 export const ColorPickerPage = () => {
   const { colorValues, setColorValues } = useColorValues();
@@ -40,43 +41,56 @@ export const ColorPickerPage = () => {
 
   return (
     <Div100vh>
-      <Input
-        id="inputHex"
-        icon={<HashTag />}
-        value={colorValues.hex.slice(1)}
-      />
-      <Select
-        value={conversion}
-        onChange={(e) => e !== null && setConversion(e)}
-        data={conversionData}
-      />
-      <section className="palettes">
-        <div
-          style={{ width: "105px", height: "20px", backgroundColor: "#D9D9D9" }}
-        ></div>
-        <div
-          style={{
-            width: "105px",
-            height: "20px",
-            backgroundColor: `${colorValues.hex}`,
-          }}
-        ></div>
-      </section>
-      <ColorPicker
-        format="hex"
-        value={colorValues.hex}
-        onChange={(e) => handleChange(e)}
-        style={{ width: "fit-content", margin: "0 auto" }}
-      />
-      {conversion === "rgb" && (
-        <SettingRGB colorValues={colorValues} setColorValues={setColorValues} />
-      )}
-      {conversion === "cmyk" && (
-        <SettingCMYK
-          colorValues={colorValues}
-          setColorValues={setColorValues}
+      <Content>
+        <Input
+          id="inputHex"
+          icon={<HashTag />}
+          value={colorValues.hex.slice(1)}
         />
-      )}
+        <Select
+          value={conversion}
+          onChange={(e) => e !== null && setConversion(e)}
+          data={conversionData}
+        />
+        <section className="palettes">
+          <div
+            style={{
+              width: "105px",
+              height: "20px",
+              backgroundColor: "#D9D9D9",
+            }}
+          ></div>
+          <div
+            style={{
+              width: "105px",
+              height: "20px",
+              backgroundColor: `${colorValues.hex}`,
+            }}
+          ></div>
+        </section>
+        <ColorPicker
+          format="hex"
+          value={colorValues.hex}
+          onChange={(e) => handleChange(e)}
+          style={{ width: "fit-content", margin: "0 auto" }}
+        />
+        {conversion === "rgb" && (
+          <SettingRGB
+            colorValues={colorValues}
+            setColorValues={setColorValues}
+          />
+        )}
+        {conversion === "cmyk" && (
+          <SettingCMYK
+            colorValues={colorValues}
+            setColorValues={setColorValues}
+          />
+        )}
+      </Content>
     </Div100vh>
   );
 };
+
+const Content = styled.div`
+  padding-top: 20%;
+`;
