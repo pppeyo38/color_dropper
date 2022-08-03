@@ -1,14 +1,17 @@
 export const useHexToRgb = () => {
+  // 16進数変換
   const toHex = (value: number) => {
     let hexadecimal = value.toString(16);
     return hexadecimal.length == 1 ? "0" + hexadecimal : hexadecimal;
   };
 
-  const setHexColorCode = (r: number, g: number, b: number) => {
-    return "#" + toHex(r) + toHex(g) + toHex(b);
+  // RGB→Hex
+  const setRGBtoHex = (rgb: { red: number; green: number; blue: number }) => {
+    return "#" + toHex(rgb["red"]) + toHex(rgb["green"]) + toHex(rgb["blue"]);
   };
 
-  const setDecimal = (hex: string) => {
+  // Hex→RGB
+  const setHextoRGB = (hex: string) => {
     if (hex.slice(0, 1) === "#") hex = hex.slice(1);
     if (hex.length == 3) {
       hex =
@@ -27,5 +30,5 @@ export const useHexToRgb = () => {
     };
   };
 
-  return { toHex, setHexColorCode, setDecimal };
+  return { toHex, setRGBtoHex, setHextoRGB };
 };

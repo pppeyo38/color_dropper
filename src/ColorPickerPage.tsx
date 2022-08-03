@@ -11,7 +11,7 @@ import "./styles/colorPickerPage.css";
 
 export const ColorPickerPage = () => {
   const { colorValues, setColorValues } = useColorValues();
-  const { setDecimal } = useHexToRgb();
+  const { setHextoRGB } = useHexToRgb();
   const { setRGBtoCMYK } = useCmykToRgb();
 
   // 変換方式
@@ -21,6 +21,22 @@ export const ColorPickerPage = () => {
     { value: "hsv", label: "HSV" },
   ];
   const [conversion, setConversion] = useState("rgb");
+
+  const handleChange = (value: string) => {
+    const rgb = setHextoRGB(value);
+    setColorValues((prev) => ({
+      ...prev,
+      hex: value,
+      rgb: rgb,
+      cmyk: {
+        ...prev.cmyk,
+        cyan: setRGBtoCMYK(rgb)[0],
+        magenta: setRGBtoCMYK(rgb)[1],
+        yellow: setRGBtoCMYK(rgb)[2],
+        key: setRGBtoCMYK(rgb)[3],
+      },
+    }));
+  };
 
   return (
     <Div100vh>
@@ -49,21 +65,7 @@ export const ColorPickerPage = () => {
       <ColorPicker
         format="hex"
         value={colorValues.hex}
-        onChange={(e) => {
-          const get = setDecimal(e);
-          const cmyk = setRGBtoCMYK(get);
-          setColorValues({
-            ...colorValues,
-            hex: e,
-            rgb: { red: get.red, green: get.green, blue: get.blue },
-            cmyk: {
-              cyan: cmyk[0],
-              magenta: cmyk[1],
-              yellow: cmyk[2],
-              key: cmyk[3],
-            },
-          });
-        }}
+        onChange={(e) => handleChange(e)}
         style={{ width: "fit-content", margin: "0 auto" }}
       />
       {conversion === "rgb" && (

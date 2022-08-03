@@ -11,7 +11,7 @@ type Props = {
 
 export const SettingCMYK: FC<Props> = (props) => {
   const { colorValues, setColorValues } = props;
-  const { setHexColorCode } = useHexToRgb();
+  const { setRGBtoHex } = useHexToRgb();
   const { setCMYKtoRGB } = useCmykToRgb();
 
   const handleChange = (value: number, color: string) => {
@@ -30,7 +30,7 @@ export const SettingCMYK: FC<Props> = (props) => {
     }));
     setColorValues((prev) => ({
       ...prev,
-      hex: setHexColorCode(prev.rgb.red, prev.rgb.green, prev.rgb.blue),
+      hex: setRGBtoHex(prev.rgb),
     }));
   };
 

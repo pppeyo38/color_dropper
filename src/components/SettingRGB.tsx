@@ -10,7 +10,7 @@ type Props = {
 
 export const SettingRGB: FC<Props> = (props) => {
   const { colorValues, setColorValues } = props;
-  const { setHexColorCode } = useHexToRgb();
+  const { setRGBtoHex } = useHexToRgb();
 
   const handleChange = (value: number, color: string) => {
     setColorValues((prev) => ({
@@ -19,7 +19,7 @@ export const SettingRGB: FC<Props> = (props) => {
     }));
     setColorValues((prev) => ({
       ...prev,
-      hex: setHexColorCode(prev.rgb.red, prev.rgb.green, prev.rgb.blue),
+      hex: setRGBtoHex(prev.rgb),
     }));
   };
 
