@@ -3,6 +3,7 @@ import { Slider, NumberInput } from "@mantine/core";
 import { useHexToRgb } from "../hooks/useHexToRgb";
 import { ColorValuesType } from "../hooks/useColor";
 import { useCmykToRgb } from "../hooks/useCmykToRgb";
+import styled from "styled-components";
 
 type Props = {
   colorValues: ColorValuesType;
@@ -34,10 +35,19 @@ export const SettingCMYK: FC<Props> = (props) => {
     }));
   };
 
+  //　Keyスライダー用のCMYのみの色
+  const rgb = setCMYKtoRGB({
+    cyan: colorValues.cmyk.cyan,
+    magenta: colorValues.cmyk.magenta,
+    yellow: colorValues.cmyk.yellow,
+    key: 0,
+  });
+  const keyBg = setRGBtoHex({ red: rgb[0], green: rgb[1], blue: rgb[2] });
+
   return (
     <section className="cmykSectionStyle">
-      <div className="sliderWrap cyanSlider">
-        <p className="sliderLabel">C</p>
+      <SliderWrap bg={"#00FFF0"}>
+        <SliderLabel>C</SliderLabel>
         <Slider
           max={100}
           value={colorValues.cmyk.cyan}
@@ -55,9 +65,9 @@ export const SettingCMYK: FC<Props> = (props) => {
             }
           }}
         />
-      </div>
-      <div className="sliderWrap magentaSlider">
-        <p className="sliderLabel">M</p>
+      </SliderWrap>
+      <SliderWrap bg={"#FF00C7"}>
+        <SliderLabel>M</SliderLabel>
         <Slider
           max={100}
           value={colorValues.cmyk.magenta}
@@ -75,9 +85,9 @@ export const SettingCMYK: FC<Props> = (props) => {
             }
           }}
         />
-      </div>
-      <div className="sliderWrap yellowSlider">
-        <p className="sliderLabel">Y</p>
+      </SliderWrap>
+      <SliderWrap bg={"#FAFF00"}>
+        <SliderLabel>Y</SliderLabel>
         <Slider
           max={100}
           value={colorValues.cmyk.yellow}
@@ -95,9 +105,9 @@ export const SettingCMYK: FC<Props> = (props) => {
             }
           }}
         />
-      </div>
-      <div className="sliderWrap keySlider">
-        <p className="sliderLabel">K</p>
+      </SliderWrap>
+      <KeySlider bg={keyBg}>
+        <SliderLabel>K</SliderLabel>
         <Slider
           max={100}
           value={colorValues.cmyk.key}
@@ -115,7 +125,7 @@ export const SettingCMYK: FC<Props> = (props) => {
             }
           }}
         />
-      </div>
+      </KeySlider>
     </section>
   );
 };
@@ -123,3 +133,59 @@ export const SettingCMYK: FC<Props> = (props) => {
 const sliderStyle = {
   width: "210px",
 };
+
+const SliderLabel = styled.p`
+  position: absolute;
+  top: 0;
+  left: -35px;
+  font-family: Roboto;
+`;
+
+const SliderWrap = styled.div<{ bg: string }>`
+  position: relative;
+  width: 210px;
+  display: flex;
+
+  & .mantine-Slider-root > .mantine-Slider-track > .mantine-Slider-bar {
+    display: none;
+  }
+
+  & .mantine-Slider-root > .mantine-Slider-track:before {
+    ${({ bg }) => `background: ${bg}`};
+  }
+
+  & .mantine-Slider-root > .mantine-Slider-track > .mantine-Slider-thumb {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: solid 3px white;
+    background: none;
+    box-shadow: 0 0 0 0.5px #9b9b9b, inset 0 0 0 0.5px #9b9b9b;
+  }
+`;
+
+// Kスライダー
+const KeySlider = styled.div<{ bg: string }>`
+  position: relative;
+  width: 210px;
+  display: flex;
+
+  & .mantine-Slider-root > .mantine-Slider-track > .mantine-Slider-bar {
+    display: none;
+  }
+
+  & .mantine-Slider-root > .mantine-Slider-track:before {
+    ${({ bg }) => `background: linear-gradient(to right, ${bg}, black)`}
+  }
+
+  & .mantine-Slider-root > .mantine-Slider-track > .mantine-Slider-thumb {
+    display: inline-block;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    border: solid 3px white;
+    background: none;
+    box-shadow: 0 0 0 0.5px #9b9b9b, inset 0 0 0 0.5px #9b9b9b;
+  }
+`;
