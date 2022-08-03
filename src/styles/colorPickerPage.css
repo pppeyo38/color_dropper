@@ -190,3 +190,57 @@
   min-height: 25px;
   padding: 3px 9px;
 }
+
+/* CMYKスライダー */
+.cmykSectionStyle {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  width: 210px;
+  margin: 15px auto 0;
+}
+
+.cyanSlider
+  > .mantine-Slider-root
+  > .mantine-Slider-track
+  > .mantine-Slider-bar {
+  background-color: rgb(0, 250, 240);
+}
+
+.cyanSlider
+  > .mantine-Slider-root
+  > .mantine-Slider-track
+  > .mantine-Slider-thumb {
+  background-color: rgb(0, 250, 240);
+  border: 3px solid white;
+}
+
+.magentaSlider
+  > .mantine-Slider-root
+  > .mantine-Slider-track
+  > .mantine-Slider-bar {
+  background-color: rgb(255, 0, 199);
+}
+
+.magentaSlider
+  > .mantine-Slider-root
+  > .mantine-Slider-track
+  > .mantine-Slider-thumb {
+  background-color: rgb(255, 0, 199);
+  border: 3px solid white;
+}
+
+.yellowSlider
+  > .mantine-Slider-root
+  > .mantine-Slider-track
+  > .mantine-Slider-bar {
+  background-color: rgb(250, 255, 0);
+}
+
+.yellowSlider
+  > .mantine-Slider-root
+  > .mantine-Slider-track
+  > .mantine-Slider-thumb {
+  background-color: rgb(250, 255, 0);
+  border: 3px solid white;
+}
